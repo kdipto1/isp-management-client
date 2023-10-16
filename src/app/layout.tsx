@@ -1,8 +1,7 @@
+import ReduxProvider from "@/lib/ReduxProvider";
 import "./globals.css";
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
-
-const inter = Inter({ subsets: ["latin"] });
+import Navbar from "@/components/UI/Navbar";
 
 export const metadata: Metadata = {
   title: "ISP Management",
@@ -16,7 +15,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body>
+        <Navbar />
+        <ReduxProvider>{children}</ReduxProvider>
+      </body>
     </html>
   );
 }
