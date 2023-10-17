@@ -22,9 +22,8 @@ const LoginPage = () => {
     data.contactNo = Number(data.contactNo);
     try {
       const res = await loginData(data).unwrap();
-      // console.log(res);
-      storeUserInfo({ accessToken: res?.accessToken });
-      if (res?.accessToken) {
+      storeUserInfo({ accessToken: res?.data?.accessToken });
+      if (res?.data?.accessToken) {
         router.push("/");
         message.success("User logged in successfully!");
       }
