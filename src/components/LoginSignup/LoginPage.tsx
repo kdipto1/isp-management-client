@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import { SubmitHandler } from "react-hook-form";
 import Form from "../Form/Form";
 import FormInput from "../Form/FormInput";
+import Link from "next/link";
 
 type FormValues = {
   contactNo: number;
@@ -61,6 +62,11 @@ const LoginPage = () => {
               </Button>
             </Form>
           </div>
+          <small>
+            <p>
+              Don &apos t have an account <Link href={"/signup"}>SignUp</Link>
+            </p>
+          </small>
         </Col>
       </Row>
     </>
