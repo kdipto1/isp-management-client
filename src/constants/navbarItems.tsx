@@ -1,5 +1,9 @@
 import type { MenuProps } from "antd";
-import { BookOutlined, DashboardFilled } from "@ant-design/icons";
+import {
+  BookOutlined,
+  DashboardFilled,
+  LoginOutlined,
+} from "@ant-design/icons";
 import Link from "next/link";
 import { USER_ROLE } from "./role";
 
@@ -14,6 +18,11 @@ export const navbarItems = (role: string) => {
       label: <Link href={"/about-us"}>About us</Link>,
       key: "/about-us",
       icon: <BookOutlined />,
+    },
+    {
+      label: <Link href={"/login"}>Login</Link>,
+      key: "/login",
+      icon: <LoginOutlined />,
     },
   ];
   const userItems: MenuProps["items"] = [
