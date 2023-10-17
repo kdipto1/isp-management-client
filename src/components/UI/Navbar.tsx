@@ -1,8 +1,12 @@
 "use client";
 import { navbarItems } from "@/constants/navbarItems";
 import { getUserInfo } from "@/services/auth.service";
-import { BankFilled } from "@ant-design/icons";
-import { Layout, Menu } from "antd";
+import {
+  BankFilled,
+  EllipsisOutlined,
+  MenuFoldOutlined,
+} from "@ant-design/icons";
+import { ConfigProvider, Layout, Menu } from "antd";
 import Link from "next/link";
 
 const { Header } = Layout;
@@ -20,16 +24,31 @@ const Navbar = () => {
           paddingRight: "10px",
         }}
       >
-        <Link href={"/"} style={{ all: "unset" }}>
+        <Link href={"/"} style={{}}>
           <BankFilled style={{ fontSize: "30px" }} />
         </Link>
-        <Menu
-          theme="dark"
-          mode="horizontal"
-          defaultSelectedKeys={["2"]}
-          items={navbarItems(role)}
-          style={{ background: "none", color: "black" }}
-        />
+        <ConfigProvider
+          theme={{
+            components: {
+              Menu: {
+                itemActiveBg: "black",
+                itemSelectedColor: "red",
+              },
+            },
+          }}
+        >
+          <Menu
+            multiple={true}
+            theme="dark"
+            overflowedIndicator={<MenuFoldOutlined />}
+            disabledOverflow
+            mode="horizontal"
+            defaultSelectedKeys={["2"]}
+            items={navbarItems(role)}
+
+            // style={{ background: "none", color: "black" }}
+          />
+        </ConfigProvider>
       </Header>
     </>
   );

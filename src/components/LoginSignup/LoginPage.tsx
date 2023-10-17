@@ -63,7 +63,7 @@ const LoginPage = () => {
           </div>
           <small>
             <p>
-              Don &apos t have an account <Link href={"/signup"}>SignUp</Link>
+              Dont have an account <Link href={"/signup"}>SignUp</Link>
             </p>
           </small>
         </Col>
