@@ -3,6 +3,7 @@ import {
   BookOutlined,
   DashboardFilled,
   LoginOutlined,
+  TableOutlined,
 } from "@ant-design/icons";
 import Link from "next/link";
 import { USER_ROLE } from "./role";
@@ -45,9 +46,9 @@ export const navbarItems = (role: string) => {
   const superAdminItems: MenuProps["items"] = [
     ...defaultItems,
     {
-      label: <Link href={`/${role}/dashboard`}>Dashboard</Link>,
+      label: <Link href={`/${role}`}>Dashboard</Link>,
       icon: <DashboardFilled />,
-      key: `/${role}/dashboard`,
+      key: `/${role}`,
     },
   ];
 
