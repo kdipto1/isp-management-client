@@ -1,7 +1,8 @@
 "use client";
 import { useUserProfileQuery } from "@/redux/api/usersApi";
-import { Descriptions } from "antd";
+import { Button, Descriptions } from "antd";
 import Image from "next/image";
+import Link from "next/link";
 
 const ProfilePage = () => {
   const { data, isLoading } = useUserProfileQuery(undefined);
@@ -44,6 +45,11 @@ const ProfilePage = () => {
         <Descriptions.Item label="Created At">{createdAt}</Descriptions.Item>
         <Descriptions.Item label="Updated At">{updatedAt}</Descriptions.Item>
       </Descriptions>
+      <Link href={`/admin/profile/edit/${id}`}>
+        <Button style={{ marginTop: "4px", color: "blueviolet" }} type="dashed">
+          Edit Profile
+        </Button>
+      </Link>
     </div>
   );
 };
