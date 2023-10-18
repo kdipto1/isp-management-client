@@ -31,7 +31,7 @@ const Navbar = () => {
           theme={{
             components: {
               Menu: {
-                itemActiveBg: "black",
+                itemActiveBg: "none",
                 itemSelectedColor: "red",
               },
             },
