@@ -51,4 +51,9 @@ export const usersApi = baseApi.injectEndpoints({
   }),
 });
 
-export const {} = usersApi;
+export const {
+  useUsersQuery,
+  useUserQuery,
+  useUpdateUserMutation,
+  useDeleteUserMutation,
+} = usersApi;
