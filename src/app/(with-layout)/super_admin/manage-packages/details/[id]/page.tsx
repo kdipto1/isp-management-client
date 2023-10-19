@@ -2,7 +2,6 @@
 import { usePackageQuery } from "@/redux/api/packageApi";
 
 import { Descriptions } from "antd";
-import Image from "next/image";
 
 const DetailsPage = ({ params }: { params: any }) => {
   const { id } = params;

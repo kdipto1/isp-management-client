@@ -5,7 +5,10 @@ import FormInput from "@/components/Form/FormInput";
 import FormSelectField, {
   SelectOptions,
 } from "@/components/Form/FormSelectField";
-import { USER_ROLE } from "@/constants/role";
+import {
+  usePackageQuery,
+  useUpdatePackageMutation,
+} from "@/redux/api/packageApi";
 import { useUpdateUserMutation, useUserQuery } from "@/redux/api/usersApi";
 import { Button, Col, Row, message } from "antd";
 
@@ -13,114 +16,76 @@ type IDProps = {
   params: any;
 };
 
-const UserEditPage = ({ params }: IDProps) => {
-  const [updateDepartment] = useUpdateUserMutation();
+const PackageEditPage = ({ params }: IDProps) => {
+  const [updatePackage] = useUpdatePackageMutation();
   const { id } = params;
-  const { data, isLoading } = useUserQuery(id);
+  const { data, isLoading } = usePackageQuery(id);
   if (isLoading) return;
-  const { email, firstName, lastName, middleName, contactNo, address, role } =
-    data;
+  const { name, price, bandwidth, bdix, iptv } = data;
+  console.log(data);
   const onSubmit = async (values: any) => {
     message.loading("Updating..............");
-    values.contactNo = Number(values.contactNo);
+
     try {
       // console.log(data);
-      await updateDepartment({ id, body: values });
-      message.success("Department Updated Successfully");
+      await updatePackage({ id, body: values });
+      message.success("Package Updated Successfully");
     } catch (err: any) {
       // console.error(err.message);
       message.error(err.message);
     }
   };
   const defaultValues = {
-    email: email || "",
-    firstName: firstName || "",
-    lastName: lastName || "",
-    middleName: middleName || "",
-    contactNo: contactNo || "",
-    address: address || "",
-    role: role || "",
+    name: name || "",
+    price: price || "",
+    bandwidth: bandwidth || "",
+    bdix: bdix || "No",
+    iptv: iptv || "No",
   };
-  const roleOptions = [
-    {
-      label: "User",
-      value: "user",
-    },
-    {
-      label: "Admin",
-      value: "admin",
-    },
-    {
-      label: "Super Admin",
-      value: "super_admin",
-    },
-  ];
   return (
     <div>
       <Row justify={"center"} align={"middle"} style={{ minHeight: "100vh" }}>
         <Col sm={12} md={8} lg={8}>
-          <h1 style={{ margin: "15px 0" }}>Update User</h1>
+          <h1 style={{ margin: "15px 0" }}>Update Package</h1>
           <div>
             <Form submitHandler={onSubmit} defaultValues={defaultValues}>
-              <div>
-                <FormInput
-                  name="firstName"
-                  type="text"
-                  size="large"
-                  label="First Name"
-                  required
-                />
+              <div style={{ margin: "6px 0" }}>
+                <FormInput name="name" type="text" size="large" label="Name" />
               </div>
-              <div style={{ margin: "4px 0" }}>
+              <div style={{ margin: "6px 0" }}>
                 <FormInput
-                  name="middleName"
-                  type="text"
-                  size="large"
-                  label="Middle Name"
-                />
-              </div>
-              <div>
-                <FormInput
-                  name="lastName"
-                  type="text"
-                  size="large"
-                  label="Last Name"
-                  required
-                />
-              </div>
-              <div style={{ margin: "4px 0" }}>
-                <FormInput
-                  name="contactNo"
+                  name="price"
                   type="number"
                   size="large"
-                  label="Your Phone Number"
-                  required
+                  label="Price"
                 />
               </div>
-              <div>
+              <div style={{ margin: "6px 0" }}>
                 <FormInput
-                  name="email"
-                  type="email"
+                  name="bandwidth"
+                  type="number"
                   size="large"
-                  label="Email"
-                  required
+                  label="Bandwidth"
                 />
               </div>
-              <div style={{ margin: "4px 0" }}>
+              <div style={{ margin: "6px 0" }}>
                 <FormSelectField
-                  name="role"
-                  label="Role"
-                  options={roleOptions}
+                  name="iptv"
+                  label="IPTV"
+                  options={[
+                    { label: "Yes", value: true },
+                    { label: "No", value: false },
+                  ]}
                 />
               </div>
-
-              <div>
-                <FormInput
-                  name="address"
-                  type="text"
-                  size="large"
-                  label="Address"
-                  required
+              <div style={{ margin: "6px 0" }}>
+                <FormSelectField
+                  name="bdix"
+                  label="BDIX"
+                  options={[
+                    { label: "Yes", value: true },
+                    { label: "No", value: false },
+                  ]}
                 />
               </div>
 
@@ -139,4 +104,4 @@ const UserEditPage = ({ params }: IDProps) => {
   );
 };
 
-export default UserEditPage;
+export default PackageEditPage;
