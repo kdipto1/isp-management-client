@@ -10,7 +10,7 @@ type IDProps = {
 };
 
 const ProfileEditPage = ({ params }: IDProps) => {
-  const [updateDepartment] = useUpdateUserMutation();
+  const [updateUser] = useUpdateUserMutation();
   const { id } = params;
   const { data, isLoading } = useUserQuery(id);
   if (isLoading) return;
@@ -20,8 +20,8 @@ const ProfileEditPage = ({ params }: IDProps) => {
     message.loading("Updating..............");
     try {
       // console.log(data);
-      await updateDepartment({ id, body: values });
-      message.success("Department Updated Successfully");
+      await updateUser({ id, body: values });
+      message.success("User Updated Successfully");
     } catch (err: any) {
       // console.error(err.message);
       message.error(err.message);
@@ -78,7 +78,7 @@ const ProfileEditPage = ({ params }: IDProps) => {
                   disabled
                 />
               </div>
-              <div>
+              <div style={{ margin: "4px 0" }}>
                 <FormInput
                   name="email"
                   type="email"
@@ -88,7 +88,7 @@ const ProfileEditPage = ({ params }: IDProps) => {
                 />
               </div>
 
-              <div>
+              <div style={{ margin: "4px 0" }}>
                 <FormInput
                   name="address"
                   type="text"

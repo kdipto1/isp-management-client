@@ -1,3 +1,4 @@
+import { ResponseSuccessType } from "@/types";
 import { getFromLocalStorage } from "@/utils/local-storage";
 import axios from "axios";
 
@@ -15,5 +16,14 @@ instance.interceptors.request.use(
     return Promise.reject(error);
   }
 );
-
+instance.interceptors.response.use(
+  //@ts-ignore
+  function (response) {
+    const responseObject: ResponseSuccessType = {
+      data: response?.data?.data,
+      meta: response?.data?.meta,
+    };
+    return responseObject;
+  }
+);
 export { instance };

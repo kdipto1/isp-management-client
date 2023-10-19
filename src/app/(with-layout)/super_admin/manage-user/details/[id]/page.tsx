@@ -1,14 +1,14 @@
 "use client";
-import { useUserProfileQuery } from "@/redux/api/usersApi";
-import { Button, Descriptions } from "antd";
+import { useUserQuery } from "@/redux/api/usersApi";
+import { Descriptions } from "antd";
 import Image from "next/image";
-import Link from "next/link";
 
-const ProfilePage = () => {
-  const { data, isLoading } = useUserProfileQuery(undefined);
+const DetailsPage = ({ params }: { params: any }) => {
+  const { id } = params;
+  const { data, isLoading } = useUserQuery(id);
   if (isLoading) return;
+
   const {
-    id,
     email,
     firstName,
     lastName,
@@ -22,7 +22,7 @@ const ProfilePage = () => {
   } = data;
   return (
     <div>
-      <h1>Profile Details</h1>
+      <h1>User Details</h1>
       <Descriptions bordered column={2}>
         <Descriptions.Item label="Profile Image">
           {profileImage && (
@@ -45,13 +45,8 @@ const ProfilePage = () => {
         <Descriptions.Item label="Created At">{createdAt}</Descriptions.Item>
         <Descriptions.Item label="Updated At">{updatedAt}</Descriptions.Item>
       </Descriptions>
-      <Link href={`/super_admin/profile/edit/${id}`}>
-        <Button style={{ marginTop: "4px", color: "blueviolet" }} type="dashed">
-          Edit Profile
-        </Button>
-      </Link>
     </div>
   );
 };
 
-export default ProfilePage;
+export default DetailsPage;

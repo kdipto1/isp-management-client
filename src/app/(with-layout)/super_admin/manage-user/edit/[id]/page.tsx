@@ -2,6 +2,10 @@
 
 import Form from "@/components/Form/Form";
 import FormInput from "@/components/Form/FormInput";
+import FormSelectField, {
+  SelectOptions,
+} from "@/components/Form/FormSelectField";
+import { USER_ROLE } from "@/constants/role";
 import { useUpdateUserMutation, useUserQuery } from "@/redux/api/usersApi";
 import { Button, Col, Row, message } from "antd";
 
@@ -10,18 +14,19 @@ type IDProps = {
 };
 
 const ProfileEditPage = ({ params }: IDProps) => {
-  const [updateUser] = useUpdateUserMutation();
+  const [updateDepartment] = useUpdateUserMutation();
   const { id } = params;
   const { data, isLoading } = useUserQuery(id);
   if (isLoading) return;
-  const { email, firstName, lastName, middleName, contactNo, address } =
-    data?.data;
-  const onSubmit = async (values: { title: string }) => {
+  const { email, firstName, lastName, middleName, contactNo, address, role } =
+    data;
+  const onSubmit = async (values: any) => {
     message.loading("Updating..............");
+    values.contactNo = Number(values.contactNo);
     try {
       // console.log(data);
-      await updateUser({ id, body: values });
-      message.success("User Updated Successfully");
+      await updateDepartment({ id, body: values });
+      message.success("Department Updated Successfully");
     } catch (err: any) {
       // console.error(err.message);
       message.error(err.message);
@@ -34,12 +39,27 @@ const ProfileEditPage = ({ params }: IDProps) => {
     middleName: middleName || "",
     contactNo: contactNo || "",
     address: address || "",
+    role: role || "",
   };
+  const roleOptions = [
+    {
+      label: "User",
+      value: "user",
+    },
+    {
+      label: "Admin",
+      value: "admin",
+    },
+    {
+      label: "Super Admin",
+      value: "super_admin",
+    },
+  ];
   return (
     <div>
       <Row justify={"center"} align={"middle"} style={{ minHeight: "100vh" }}>
         <Col sm={12} md={8} lg={8}>
-          <h1 style={{ margin: "15px 0" }}>Update Profile</h1>
+          <h1 style={{ margin: "15px 0" }}>Update User</h1>
           <div>
             <Form submitHandler={onSubmit} defaultValues={defaultValues}>
               <div>
@@ -75,7 +95,6 @@ const ProfileEditPage = ({ params }: IDProps) => {
                   size="large"
                   label="Your Phone Number"
                   required
-                  disabled
                 />
               </div>
               <div>
@@ -85,6 +104,13 @@ const ProfileEditPage = ({ params }: IDProps) => {
                   size="large"
                   label="Email"
                   required
+                />
+              </div>
+              <div style={{ margin: "4px 0" }}>
+                <FormSelectField
+                  name="role"
+                  label="Role"
+                  options={roleOptions}
                 />
               </div>
 
