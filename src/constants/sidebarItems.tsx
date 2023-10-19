@@ -8,6 +8,7 @@ import {
   NotificationOutlined,
   ProfileOutlined,
   TableOutlined,
+  UserAddOutlined,
 } from "@ant-design/icons";
 import Link from "next/link";
 import { USER_ROLE } from "./role";
@@ -26,6 +27,11 @@ export const sidebarItems = (role: string) => {
       label: <Link href={`/${role}`}>Dashboard</Link>,
       icon: <DashboardFilled />,
       key: `/${role}`,
+    },
+    {
+      label: <Link href={`/${role}/review`}>Add Review</Link>,
+      icon: <UserAddOutlined />,
+      key: `/${role}/review`,
     },
   ];
   const adminItems: MenuProps["items"] = [

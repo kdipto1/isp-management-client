@@ -15,6 +15,8 @@ interface IInput {
   label?: string;
   required?: boolean;
   disabled?: boolean;
+  min?: number;
+  max?: number;
 }
 
 const FormInput = ({
@@ -28,6 +30,8 @@ const FormInput = ({
   label,
   required,
   disabled,
+  min,
+  max,
 }: IInput) => {
   const {
     control,

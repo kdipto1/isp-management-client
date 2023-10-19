@@ -7,7 +7,7 @@ export const reviewApi = baseApi.injectEndpoints({
   endpoints: (build) => ({
     // get all reviews
     reviews: build.query({
-      query: (arg: Record<string, any>) => {
+      query: (arg: Record<string, any> | undefined) => {
         return {
           url: `${REVIEW_URL}`,
           method: "GET",
@@ -40,6 +40,15 @@ export const reviewApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: [TagTypes.review],
     }),
+    // create review
+    createReview: build.mutation({
+      query: (data) => ({
+        url: `${REVIEW_URL}`,
+        method: "POST",
+        data: data,
+      }),
+      invalidatesTags: [TagTypes.review],
+    }),
     // delete review
     deleteReview: build.mutation({
       query: (id) => ({
@@ -56,4 +65,5 @@ export const {
   useReviewQuery,
   useUpdateReviewMutation,
   useDeleteReviewMutation,
+  useCreateReviewMutation,
 } = reviewApi;

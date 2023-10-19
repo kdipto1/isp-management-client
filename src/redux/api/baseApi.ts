@@ -5,7 +5,8 @@ import { axiosBaseQuery } from "@/helpers/axios/axiosBaseQuery";
 
 export const baseApi = createApi({
   baseQuery: axiosBaseQuery({
-    baseUrl: "https://isp-management-server.vercel.app/api/v1",
+    // baseUrl: "https://isp-management-server.vercel.app/api/v1",
+    baseUrl: "http://localhost:5000/api/v1",
   }),
   endpoints: () => ({}),
   tagTypes: TagTypesList,

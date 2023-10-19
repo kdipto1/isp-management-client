@@ -14,8 +14,7 @@ const ProfileEditPage = ({ params }: IDProps) => {
   const { id } = params;
   const { data, isLoading } = useUserQuery(id);
   if (isLoading) return;
-  const { email, firstName, lastName, middleName, contactNo, address } =
-    data?.data;
+  const { email, firstName, lastName, middleName, contactNo, address } = data;
   const onSubmit = async (values: { title: string }) => {
     message.loading("Updating..............");
     try {

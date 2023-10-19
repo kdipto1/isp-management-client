@@ -104,6 +104,7 @@ export interface IPayment {
 export interface IReview {
   id?: string;
   customerId: string;
+  customer?: IUser;
   message: string;
   ratting: number | null;
   createdAt?: Date;

@@ -19,7 +19,7 @@ const ProfilePage = () => {
     role,
     createdAt,
     updatedAt,
-  } = data?.data;
+  } = data;
   return (
     <div>
       <h1>Profile Details</h1>
