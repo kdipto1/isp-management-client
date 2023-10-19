@@ -1,6 +1,9 @@
 "use client";
+
 import { navbarItems } from "@/constants/navbarItems";
-import { getUserInfo } from "@/services/auth.service";
+import { removeRole } from "@/redux/features/userRoleSlice";
+import { useAppDispatch, useAppSelector } from "@/redux/hooks";
+import { getUserInfo, removeUserInfo } from "@/services/auth.service";
 import {
   BankFilled,
   EllipsisOutlined,
@@ -8,11 +11,23 @@ import {
 } from "@ant-design/icons";
 import { ConfigProvider, Layout, Menu } from "antd";
 import Link from "next/link";
+import { useEffect, useState } from "react";
 
 const { Header } = Layout;
 
 const Navbar = () => {
-  const { role } = getUserInfo() as any;
+  const [isClient, setIsClient] = useState(false);
+  const dispatch = useAppDispatch();
+  const logout = () => {
+    removeUserInfo("accessToken");
+    dispatch(removeRole);
+  };
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+  // const { role } = getUserInfo() as any;
+  const role = useAppSelector((state) => state.userRole.role);
+
   return (
     <>
       <Header
@@ -20,23 +35,24 @@ const Navbar = () => {
           display: "flex",
           alignItems: "center",
           justifyContent: "space-between",
-          backgroundColor: "wheat",
+          // backgroundColor: "wheat",
           paddingRight: "10px",
         }}
       >
         <Link href={"/"} style={{}}>
           <BankFilled style={{ fontSize: "30px" }} />
         </Link>
-        <ConfigProvider
+        {/* <ConfigProvider
           theme={{
             components: {
               Menu: {
                 itemActiveBg: "none",
-                itemSelectedColor: "red",
+                itemSelectedColor: "black",
               },
             },
           }}
-        >
+        > */}
+        {isClient ? (
           <Menu
             multiple={true}
             theme="dark"
@@ -45,10 +61,11 @@ const Navbar = () => {
             mode="horizontal"
             defaultSelectedKeys={["2"]}
             items={navbarItems(role)}
-
-            // style={{ background: "none", color: "black" }}
           />
-        </ConfigProvider>
+        ) : (
+          "prerender"
+        )}
+        {/* </ConfigProvider> */}
       </Header>
     </>
   );

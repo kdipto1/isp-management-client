@@ -1,4 +1,5 @@
 "use client";
+
 import type { MenuProps } from "antd";
 import {
   BookOutlined,
@@ -22,9 +23,9 @@ export const sidebarItems = (role: string) => {
   const userItems: MenuProps["items"] = [
     ...defaultItems,
     {
-      label: <Link href={`/${role}/dashboard`}>Dashboard</Link>,
+      label: <Link href={`/${role}`}>Dashboard</Link>,
       icon: <DashboardFilled />,
-      key: `/${role}/dashboard`,
+      key: `/${role}`,
     },
   ];
   const adminItems: MenuProps["items"] = [

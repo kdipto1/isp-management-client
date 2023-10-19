@@ -1,14 +1,16 @@
 "use client";
+
 import type { MenuProps } from "antd";
 import {
   BookOutlined,
   DashboardFilled,
   LoginOutlined,
+  LogoutOutlined,
   TableOutlined,
 } from "@ant-design/icons";
 import Link from "next/link";
 import { USER_ROLE } from "./role";
-import { useEffect } from "react";
+import { isLoggedIn } from "@/services/auth.service";
 
 export const navbarItems = (role: string) => {
   const defaultItems: MenuProps["items"] = [
@@ -22,26 +24,22 @@ export const navbarItems = (role: string) => {
       key: "/about-us",
       icon: <BookOutlined />,
     },
-    {
-      label: <Link href={"/login"}>Login</Link>,
-      key: "/login",
-      icon: <LoginOutlined />,
-    },
   ];
+
   const userItems: MenuProps["items"] = [
     ...defaultItems,
     {
-      label: <Link href={`/${role}/dashboard`}>Dashboard</Link>,
+      label: <Link href={`/${role}`}>Dashboard</Link>,
       icon: <DashboardFilled />,
-      key: `/${role}/dashboard`,
+      key: `/${role}`,
     },
   ];
   const adminItems: MenuProps["items"] = [
     ...defaultItems,
     {
-      label: <Link href={`/${role}/dashboard`}>Dashboard</Link>,
+      label: <Link href={`/${role}`}>Dashboard</Link>,
       icon: <DashboardFilled />,
-      key: `/${role}/dashboard`,
+      key: `/${role}`,
     },
   ];
 
@@ -58,6 +56,14 @@ export const navbarItems = (role: string) => {
   else if (role === USER_ROLE.ADMIN) return adminItems;
   else if (role === USER_ROLE.USER) return userItems;
   else {
-    return defaultItems;
+    // If no role is present, display the "Login" item
+    return [
+      ...defaultItems,
+      {
+        label: <Link href={"/login"}>Login</Link>,
+        key: "/login",
+        icon: <LoginOutlined />,
+      },
+    ];
   }
 };

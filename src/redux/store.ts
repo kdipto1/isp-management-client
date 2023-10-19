@@ -1,9 +1,11 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { baseApi } from "./api/baseApi";
+import userRoleReducer from "./features/userRoleSlice";
 // ...
 
 export const store = configureStore({
   reducer: {
+    userRole: userRoleReducer,
     [baseApi.reducerPath]: baseApi.reducer,
   },
   middleware: (getDefaultMiddleware) =>

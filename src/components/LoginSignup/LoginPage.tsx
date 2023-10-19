@@ -1,12 +1,14 @@
 "use client";
 import { useLoginMutation } from "@/redux/api/authApi";
-import { storeUserInfo } from "@/services/auth.service";
+import { getUserInfo, storeUserInfo } from "@/services/auth.service";
 import { Button, Col, Row, message } from "antd";
 import { useRouter } from "next/navigation";
 import { SubmitHandler } from "react-hook-form";
 import Form from "../Form/Form";
 import FormInput from "../Form/FormInput";
 import Link from "next/link";
+import { useAppDispatch } from "@/redux/hooks";
+import { addRole } from "@/redux/features/userRoleSlice";
 
 type FormValues = {
   contactNo: number;
@@ -15,6 +17,7 @@ type FormValues = {
 
 const LoginPage = () => {
   const [loginData] = useLoginMutation();
+  const dispatch = useAppDispatch();
 
   const router = useRouter();
 
@@ -27,6 +30,8 @@ const LoginPage = () => {
         router.push("/");
         message.success("User logged in successfully!");
       }
+      const { role } = getUserInfo() as any;
+      dispatch(addRole(role));
     } catch (error: any) {
       message.error(error.message);
     }

@@ -1,4 +1,5 @@
 "use client";
+
 import Contents from "@/components/Dashboard/Contents";
 import Sidebar from "@/components/Dashboard/Sidebar";
 import { isLoggedIn } from "@/services/auth.service";
