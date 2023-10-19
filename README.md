@@ -4,3 +4,4 @@
 2. Ant Design
 3. Redux
 4. Axios
+5. pnpm (package manager)
