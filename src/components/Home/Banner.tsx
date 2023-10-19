@@ -1,4 +1,3 @@
-import React from "react";
 import { Carousel } from "antd";
 import Image from "next/image";
 import banner2 from "../../assets/banner2.jpeg";
@@ -6,7 +5,7 @@ import banner1 from "../../assets/banner1.jpg";
 import banner from "../../assets/banner.jpg";
 
 const contentStyle: React.CSSProperties = {
-  height: "600px",
+  height: "700px",
   color: "#fff",
   lineHeight: "160px",
   textAlign: "center",
@@ -19,8 +18,8 @@ const Banner: React.FC = () => (
       <Image
         style={contentStyle}
         src={banner2}
-        width={1600}
-        height={600}
+        width={1500}
+        height={1000}
         alt="banner image"
       />
     </div>

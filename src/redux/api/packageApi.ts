@@ -7,7 +7,7 @@ export const packageApi = baseApi.injectEndpoints({
   endpoints: (build) => ({
     // get all packages
     packages: build.query({
-      query: (arg: Record<string, any>) => {
+      query: (arg: Record<string, any> | undefined) => {
         return {
           url: `${PACKAGE_URL}`,
           method: "GET",
