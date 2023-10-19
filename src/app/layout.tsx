@@ -2,6 +2,7 @@ import ReduxProvider from "@/lib/ReduxProvider";
 import "./globals.css";
 import type { Metadata } from "next";
 import Navbar from "@/components/UI/Navbar";
+import MyFooter from "@/components/UI/Footer";
 
 export const metadata: Metadata = {
   title: "ISP Management",
@@ -19,6 +20,7 @@ export default function RootLayout({
         <ReduxProvider>
           <Navbar />
           {children}
+          <MyFooter />
         </ReduxProvider>
       </body>
     </html>

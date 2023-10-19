@@ -21,11 +21,7 @@ export const sidebarItems = (role: string) => {
   ];
   const userItems: MenuProps["items"] = [
     ...defaultItems,
-    {
-      label: <Link href={`/${role}`}>Dashboard</Link>,
-      icon: <DashboardFilled />,
-      key: `/${role}`,
-    },
+
     {
       label: <Link href={`/${role}/review`}>Add Review</Link>,
       icon: <UserAddOutlined />,
