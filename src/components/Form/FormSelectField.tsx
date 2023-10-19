@@ -35,6 +35,7 @@ const FormSelectField = ({
   return (
     <>
       {label ? label : null}
+      {required && <span style={{ color: "red" }}>*</span>}
       <Controller
         control={control}
         name={name}

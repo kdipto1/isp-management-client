@@ -27,7 +27,7 @@ const SignUpPage = () => {
       const res = await loginData(data).unwrap();
       if (res.id) {
         router.push("/login");
-        message.success("User logged in successfully!");
+        message.success("User signed up in successfully!");
         message.info("Please login now!");
       }
     } catch (error: any) {

@@ -11,6 +11,7 @@ import {
   DeleteOutlined,
   EditOutlined,
   EyeOutlined,
+  PlusSquareOutlined,
   ReloadOutlined,
 } from "@ant-design/icons";
 import { Button, Input, message } from "antd";
@@ -26,7 +27,7 @@ const ManagePackagePage = () => {
   const [sortOrder, setSortOrder] = useState<string>("");
   const [searchTerm, setSearchTerm] = useState<string>("");
   const [open, setOpen] = useState<boolean>(false);
-  const [userId, setUserId] = useState<string>("");
+  const [packageId, setPackagerId] = useState<string>("");
 
   query["limit"] = size;
   query["page"] = page;
@@ -42,16 +43,16 @@ const ManagePackagePage = () => {
     query["searchTerm"] = debouncedSearchTerm;
   }
   const { data, isLoading } = usePackagesQuery({ ...query });
-  const [deleteUser] = useDeletePackageMutation();
+  const [deletePackage] = useDeletePackageMutation();
   if (isLoading) return;
 
   const packages = data?.packages;
   const meta = data?.meta;
 
-  const deleteUserHandler = async (id: string) => {
+  const deletePackageHandler = async (id: string) => {
     // console.log(id);
     try {
-      const res = await deleteUser(id);
+      const res = await deletePackage(id);
       if (res) {
         message.success("Package Successfully Deleted!");
         setOpen(false);
@@ -95,10 +96,6 @@ const ManagePackagePage = () => {
       sorter: true,
     },
     {
-      title: "Contact no.",
-      dataIndex: "contactNo",
-    },
-    {
       title: "Action",
       dataIndex: "id",
       render: function (data: any) {
@@ -123,7 +120,7 @@ const ManagePackagePage = () => {
             <Button
               onClick={() => {
                 setOpen(true);
-                setUserId(data);
+                setPackagerId(data);
               }}
               type="primary"
               danger
@@ -173,6 +170,16 @@ const ManagePackagePage = () => {
               <ReloadOutlined />
             </Button>
           )}
+          <Link href={"/super_admin/manage-packages/create"}>
+            <Button
+              style={{
+                margin: "0px 5px",
+              }}
+              type="primary"
+            >
+              <PlusSquareOutlined />
+            </Button>
+          </Link>
         </div>
       </ActionBar>
       <RTable
@@ -190,7 +197,7 @@ const ManagePackagePage = () => {
         title="Remove admin"
         isOpen={open}
         closeModal={() => setOpen(false)}
-        handleOk={() => deleteUserHandler(userId)}
+        handleOk={() => deletePackageHandler(packageId)}
       >
         <p className="my-5">Are you sure about deleting this package?</p>
       </RModal>

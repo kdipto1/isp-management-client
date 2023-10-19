@@ -25,11 +25,12 @@ const Sidebar = () => {
         left: 0,
         top: 0,
         bottom: 0,
+        backgroundColor: "white",
       }}
     >
       <div className="demo-logo-vertical" />
       <Menu
-        theme="dark"
+        theme="light"
         mode="inline"
         defaultSelectedKeys={["4"]}
         items={sidebarItems(role)}

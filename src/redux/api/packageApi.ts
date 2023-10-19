@@ -40,6 +40,15 @@ export const packageApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: [TagTypes.package],
     }),
+    // update package
+    createPackage: build.mutation({
+      query: (data) => ({
+        url: `${PACKAGE_URL}`,
+        method: "POST",
+        data: data,
+      }),
+      invalidatesTags: [TagTypes.package],
+    }),
     // delete package
     deletePackage: build.mutation({
       query: (id) => ({
@@ -56,4 +65,5 @@ export const {
   usePackageQuery,
   useDeletePackageMutation,
   useUpdatePackageMutation,
+  useCreatePackageMutation,
 } = packageApi;
