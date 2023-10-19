@@ -13,7 +13,7 @@ type IDProps = {
   params: any;
 };
 
-const ProfileEditPage = ({ params }: IDProps) => {
+const UserEditPage = ({ params }: IDProps) => {
   const [updateDepartment] = useUpdateUserMutation();
   const { id } = params;
   const { data, isLoading } = useUserQuery(id);
@@ -139,4 +139,4 @@ const ProfileEditPage = ({ params }: IDProps) => {
   );
 };
 
-export default ProfileEditPage;
+export default UserEditPage;

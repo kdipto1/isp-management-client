@@ -2,15 +2,16 @@
 
 import RTable from "@/components/Table/RTable";
 import ActionBar from "@/components/UI/ActionBar";
+import RModal from "@/components/UI/RModal";
 import { useDebounced } from "@/hooks/useDebounced";
-import { useUsersQuery } from "@/redux/api/usersApi";
+import { useDeleteUserMutation, useUsersQuery } from "@/redux/api/usersApi";
 import {
   DeleteOutlined,
   EditOutlined,
   EyeOutlined,
   ReloadOutlined,
 } from "@ant-design/icons";
-import { Button, Input } from "antd";
+import { Button, Input, message } from "antd";
 import dayjs from "dayjs";
 import Link from "next/link";
 import { useState } from "react";
@@ -22,6 +23,8 @@ const ManageUserPage = () => {
   const [sortBy, setSortBy] = useState<string>("");
   const [sortOrder, setSortOrder] = useState<string>("");
   const [searchTerm, setSearchTerm] = useState<string>("");
+  const [open, setOpen] = useState<boolean>(false);
+  const [userId, setUserId] = useState<string>("");
 
   query["limit"] = size;
   query["page"] = page;
@@ -37,11 +40,24 @@ const ManageUserPage = () => {
     query["searchTerm"] = debouncedSearchTerm;
   }
   const { data, isLoading } = useUsersQuery({ ...query });
+  const [deleteUser] = useDeleteUserMutation();
   if (isLoading) return;
 
   const users = data?.users;
   const meta = data?.meta;
 
+  const deleteUserHandler = async (id: string) => {
+    // console.log(id);
+    try {
+      const res = await deleteUser(id);
+      if (res) {
+        message.success("USer Successfully Deleted!");
+        setOpen(false);
+      }
+    } catch (error: any) {
+      message.error(error.message);
+    }
+  };
   const columns = [
     {
       title: "Id",
@@ -97,7 +113,14 @@ const ManageUserPage = () => {
                 <EditOutlined />
               </Button>
             </Link>
-            <Button onClick={() => console.log(data)} type="primary" danger>
+            <Button
+              onClick={() => {
+                setOpen(true);
+                setUserId(data);
+              }}
+              type="primary"
+              danger
+            >
               <DeleteOutlined />
             </Button>
           </>
@@ -122,6 +145,7 @@ const ManageUserPage = () => {
     setSortOrder("");
     setSearchTerm("");
   };
+
   return (
     <div>
       <ActionBar title="User List">
@@ -156,6 +180,14 @@ const ManageUserPage = () => {
         onTableChange={onTableChange}
         showPagination={true}
       />
+      <RModal
+        title="Remove admin"
+        isOpen={open}
+        closeModal={() => setOpen(false)}
+        handleOk={() => deleteUserHandler(userId)}
+      >
+        <p className="my-5">Are you sure about deleting this user?</p>
+      </RModal>
     </div>
   );
 };

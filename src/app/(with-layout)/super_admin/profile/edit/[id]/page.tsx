@@ -10,7 +10,7 @@ type IDProps = {
 };
 
 const ProfileEditPage = ({ params }: IDProps) => {
-  const [updateDepartment] = useUpdateUserMutation();
+  const [updateUser] = useUpdateUserMutation();
   const { id } = params;
   const { data, isLoading } = useUserQuery(id);
   if (isLoading) return;
@@ -19,8 +19,8 @@ const ProfileEditPage = ({ params }: IDProps) => {
     message.loading("Updating..............");
     try {
       // console.log(data);
-      await updateDepartment({ id, body: values });
-      message.success("Department Updated Successfully");
+      await updateUser({ id, body: values });
+      message.success("User Updated Successfully");
     } catch (err: any) {
       // console.error(err.message);
       message.error(err.message);
