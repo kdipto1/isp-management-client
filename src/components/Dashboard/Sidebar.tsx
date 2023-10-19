@@ -1,13 +1,23 @@
 "use client";
 
 import { sidebarItems } from "@/constants/sidebarItems";
-import { getUserInfo } from "@/services/auth.service";
-import { Layout, Menu, theme } from "antd";
-import { useState } from "react";
+import { removeRole } from "@/redux/features/userRoleSlice";
+import { useAppDispatch } from "@/redux/hooks";
+import { getUserInfo, removeUserInfo } from "@/services/auth.service";
+import { Button, Layout, Menu, message } from "antd";
+import { useRouter } from "next/navigation";
 
 const { Sider } = Layout;
 const Sidebar = () => {
   const { role } = getUserInfo() as any;
+  const router = useRouter();
+  const dispatch = useAppDispatch();
+  const logout = () => {
+    removeUserInfo("accessToken");
+    dispatch(removeRole);
+    message.info("Logged out successfully");
+    router.push("/");
+  };
   return (
     <Sider
       breakpoint="lg"
@@ -35,6 +45,11 @@ const Sidebar = () => {
         defaultSelectedKeys={["4"]}
         items={sidebarItems(role)}
       />
+      <div style={{ textAlign: "center" }}>
+        <Button type="primary" onClick={logout}>
+          Logout
+        </Button>
+      </div>
     </Sider>
   );
 };

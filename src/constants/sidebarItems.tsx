@@ -2,9 +2,7 @@
 
 import type { MenuProps } from "antd";
 import {
-  BookOutlined,
   DashboardFilled,
-  LoginOutlined,
   NotificationOutlined,
   ProfileOutlined,
   TableOutlined,
@@ -37,9 +35,39 @@ export const sidebarItems = (role: string) => {
   const adminItems: MenuProps["items"] = [
     ...defaultItems,
     {
-      label: <Link href={`/${role}/dashboard`}>Dashboard</Link>,
-      icon: <DashboardFilled />,
-      key: `/${role}/dashboard`,
+      label: <Link href={`/${role}/manage-packages`}>Manage Packages</Link>,
+      icon: <TableOutlined />,
+      key: `/${role}/manage-packages`,
+    },
+    {
+      label: (
+        <Link href={`/${role}/manage-new-connection-req`}>
+          Manage New Connection Request
+        </Link>
+      ),
+      icon: <TableOutlined />,
+      key: `/${role}/manage-new-connection-req`,
+    },
+    {
+      label: (
+        <Link href={`/${role}/manage-notification`}>Manage Notification</Link>
+      ),
+      icon: <NotificationOutlined />,
+      key: `/${role}/manage-notification`,
+    },
+    {
+      label: (
+        <Link href={`/${role}/manage-customer-connection-status`}>
+          Manage Customer Connection Status
+        </Link>
+      ),
+      icon: <TableOutlined />,
+      key: `/${role}/manage-connections-status`,
+    },
+    {
+      label: <Link href={`/${role}/manage-blogs`}>Manage Blogs</Link>,
+      icon: <TableOutlined />,
+      key: `/${role}/manage-blogs`,
     },
   ];
 
