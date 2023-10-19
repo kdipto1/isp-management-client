@@ -20,8 +20,8 @@ export default function RootLayout({
         <ReduxProvider>
           <Navbar />
           {children}
-          <MyFooter />
         </ReduxProvider>
+        <MyFooter />
       </body>
     </html>
   );

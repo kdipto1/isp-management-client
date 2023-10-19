@@ -14,7 +14,7 @@ const Sidebar = () => {
   const dispatch = useAppDispatch();
   const logout = () => {
     removeUserInfo("accessToken");
-    dispatch(removeRole);
+    dispatch(removeRole(""));
     message.info("Logged out successfully");
     router.push("/");
   };

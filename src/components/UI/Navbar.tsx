@@ -1,14 +1,10 @@
 "use client";
 
 import { navbarItems } from "@/constants/navbarItems";
-import { removeRole } from "@/redux/features/userRoleSlice";
-import { useAppDispatch, useAppSelector } from "@/redux/hooks";
-import { getUserInfo, removeUserInfo } from "@/services/auth.service";
-import {
-  BankFilled,
-  EllipsisOutlined,
-  MenuFoldOutlined,
-} from "@ant-design/icons";
+
+import { useAppSelector } from "@/redux/hooks";
+
+import { BankFilled, MenuFoldOutlined } from "@ant-design/icons";
 import { ConfigProvider, Layout, Menu } from "antd";
 import Link from "next/link";
 import { useEffect, useState } from "react";
@@ -16,15 +12,11 @@ import { useEffect, useState } from "react";
 const { Header } = Layout;
 
 const Navbar = () => {
-  const [isClient, setIsClient] = useState(false);
-  const dispatch = useAppDispatch();
-  const logout = () => {
-    removeUserInfo("accessToken");
-    dispatch(removeRole);
-  };
-  useEffect(() => {
-    setIsClient(true);
-  }, []);
+  // const [isClient, setIsClient] = useState(false);
+
+  // useEffect(() => {
+  //   setIsClient(true);
+  // }, []);
   // const { role } = getUserInfo() as any;
   const role = useAppSelector((state) => state.userRole.role);
 
@@ -52,19 +44,17 @@ const Navbar = () => {
             },
           }}
         > */}
-        {isClient ? (
-          <Menu
-            multiple={true}
-            theme="dark"
-            overflowedIndicator={<MenuFoldOutlined />}
-            disabledOverflow
-            mode="horizontal"
-            defaultSelectedKeys={["2"]}
-            items={navbarItems(role)}
-          />
-        ) : (
-          "prerender"
-        )}
+
+        <Menu
+          multiple={true}
+          theme="dark"
+          overflowedIndicator={<MenuFoldOutlined />}
+          disabledOverflow
+          mode="horizontal"
+          defaultSelectedKeys={["2"]}
+          items={navbarItems(role)}
+        />
+
         {/* </ConfigProvider> */}
       </Header>
     </>

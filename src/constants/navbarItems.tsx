@@ -5,12 +5,9 @@ import {
   BookOutlined,
   DashboardFilled,
   LoginOutlined,
-  LogoutOutlined,
-  TableOutlined,
 } from "@ant-design/icons";
 import Link from "next/link";
 import { USER_ROLE } from "./role";
-import { isLoggedIn } from "@/services/auth.service";
 
 export const navbarItems = (role: string) => {
   const defaultItems: MenuProps["items"] = [
@@ -56,7 +53,6 @@ export const navbarItems = (role: string) => {
   else if (role === USER_ROLE.ADMIN) return adminItems;
   else if (role === USER_ROLE.USER) return userItems;
   else {
-    // If no role is present, display the "Login" item
     return [
       ...defaultItems,
       {

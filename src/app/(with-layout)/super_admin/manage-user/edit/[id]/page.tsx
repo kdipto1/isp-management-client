@@ -2,10 +2,8 @@
 
 import Form from "@/components/Form/Form";
 import FormInput from "@/components/Form/FormInput";
-import FormSelectField, {
-  SelectOptions,
-} from "@/components/Form/FormSelectField";
-import { USER_ROLE } from "@/constants/role";
+import FormSelectField from "@/components/Form/FormSelectField";
+
 import { useUpdateUserMutation, useUserQuery } from "@/redux/api/usersApi";
 import { Button, Col, Row, message } from "antd";
 
@@ -14,7 +12,7 @@ type IDProps = {
 };
 
 const UserEditPage = ({ params }: IDProps) => {
-  const [updateDepartment] = useUpdateUserMutation();
+  const [updateUser] = useUpdateUserMutation();
   const { id } = params;
   const { data, isLoading } = useUserQuery(id);
   if (isLoading) return;
@@ -25,8 +23,8 @@ const UserEditPage = ({ params }: IDProps) => {
     values.contactNo = Number(values.contactNo);
     try {
       // console.log(data);
-      await updateDepartment({ id, body: values });
-      message.success("Department Updated Successfully");
+      await updateUser({ id, body: values });
+      message.success("User Updated Successfully");
     } catch (err: any) {
       // console.error(err.message);
       message.error(err.message);
