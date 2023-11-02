@@ -1,8 +1,8 @@
 const AboutUsPage = () => {
   return (
-    <div>
-      <h2>This is about mus page</h2>
-    </div>
+    <section style={{ minHeight: "100vh" }}>
+      <h2>This is about us page</h2>
+    </section>
   );
 };
 

@@ -2,9 +2,10 @@
 
 import type { MenuProps } from "antd";
 import {
-  BookOutlined,
   DashboardFilled,
+  FileOutlined,
   LoginOutlined,
+  UserOutlined,
 } from "@ant-design/icons";
 import Link from "next/link";
 import { USER_ROLE } from "./role";
@@ -14,12 +15,12 @@ export const navbarItems = (role: string) => {
     {
       label: <Link href={"/blogs"}>Blogs</Link>,
       key: "/blogs",
-      icon: <BookOutlined />,
+      icon: <FileOutlined />,
     },
     {
       label: <Link href={"/about-us"}>About us</Link>,
       key: "/about-us",
-      icon: <BookOutlined />,
+      icon: <UserOutlined />,
     },
   ];
 

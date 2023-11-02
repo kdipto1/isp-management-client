@@ -4,20 +4,13 @@ import { navbarItems } from "@/constants/navbarItems";
 
 import { useAppSelector } from "@/redux/hooks";
 
-import { BankFilled, MenuFoldOutlined } from "@ant-design/icons";
-import { ConfigProvider, Layout, Menu } from "antd";
+import { BankFilled, HomeOutlined, MenuFoldOutlined } from "@ant-design/icons";
+import { Layout, Menu } from "antd";
 import Link from "next/link";
-import { useEffect, useState } from "react";
 
 const { Header } = Layout;
 
 const Navbar = () => {
-  // const [isClient, setIsClient] = useState(false);
-
-  // useEffect(() => {
-  //   setIsClient(true);
-  // }, []);
-  // const { role } = getUserInfo() as any;
   const role = useAppSelector((state) => state.userRole.role);
 
   return (
@@ -32,7 +25,7 @@ const Navbar = () => {
         }}
       >
         <Link href={"/"} style={{}}>
-          <BankFilled style={{ fontSize: "30px" }} />
+          <HomeOutlined style={{ fontSize: "30px" }} />
         </Link>
         {/* <ConfigProvider
           theme={{

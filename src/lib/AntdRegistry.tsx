@@ -4,6 +4,7 @@ import React from "react";
 import { createCache, extractStyle, StyleProvider } from "@ant-design/cssinjs";
 import type Entity from "@ant-design/cssinjs/es/Cache";
 import { useServerInsertedHTML } from "next/navigation";
+import { ConfigProvider } from "antd";
 
 const StyledComponentsRegistry = ({ children }: React.PropsWithChildren) => {
   const cache = React.useMemo<Entity>(() => createCache(), []);
@@ -13,7 +14,24 @@ const StyledComponentsRegistry = ({ children }: React.PropsWithChildren) => {
       dangerouslySetInnerHTML={{ __html: extractStyle(cache, true) }}
     />
   ));
-  return <StyleProvider cache={cache}>{children}</StyleProvider>;
+  return (
+    <StyleProvider cache={cache}>
+      <ConfigProvider
+        theme={{
+          token: {
+            // Seed Token
+            colorPrimary: "#00b96b",
+            borderRadius: 2,
+
+            // Alias Token
+            colorBgContainer: "#f6ffed",
+          },
+        }}
+      >
+        {children}
+      </ConfigProvider>
+    </StyleProvider>
+  );
 };
 
 export default StyledComponentsRegistry;
