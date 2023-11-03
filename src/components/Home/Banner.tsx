@@ -16,9 +16,11 @@ const contentStyle: React.CSSProperties = {
 const Banner = () => {
   return (
     <section style={{ margin: "20px 0" }}>
-      <Row gutter={2}>
+      <Row gutter={0}>
         <Col
-          span={12}
+          xs={24}
+          sm={24}
+          md={12}
           style={{
             display: "flex",
             justifyContent: "center",
@@ -33,7 +35,7 @@ const Banner = () => {
             </span>
           </h2>
         </Col>
-        <Col span={12}>
+        <Col xs={24} sm={24} md={12}>
           <Carousel autoplay>
             <div>
               <div style={contentStyle}>

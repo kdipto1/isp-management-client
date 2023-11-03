@@ -29,15 +29,24 @@ const Navbar = () => {
       <Header
         style={{
           padding: 0,
+          margin: 0,
         }}
       >
         <Row justify={"space-between"} align={"middle"}>
-          <Col xs={20} sm={20} md={4}>
-            <Link href={"/"} style={{}}>
+          <Col
+            xs={20}
+            sm={20}
+            md={18}
+            style={{
+              backgroundColor: "#f6ffed",
+              borderBottom: `1px solid rgba(211, 167, 255, 0.17)`,
+            }}
+          >
+            <Link href={"/"} style={{ marginLeft: "3rem" }}>
               <HomeOutlined style={{ fontSize: "30px" }} />
             </Link>
           </Col>
-          <Col xs={0} sm={0} md={20}>
+          <Col xs={0} sm={0} md={6}>
             <ConfigProvider
               theme={{
                 components: {
@@ -51,7 +60,7 @@ const Navbar = () => {
               }}
             >
               <Menu
-                multiple={true}
+                style={{ paddingTop: 1 }}
                 theme="light"
                 overflowedIndicator={<MenuFoldOutlined />}
                 disabledOverflow
