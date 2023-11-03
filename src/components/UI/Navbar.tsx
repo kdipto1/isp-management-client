@@ -1,11 +1,9 @@
 "use client";
 
 import { navbarItems } from "@/constants/navbarItems";
-
 import { useAppSelector } from "@/redux/hooks";
-
-import { BankFilled, HomeOutlined, MenuFoldOutlined } from "@ant-design/icons";
-import { Layout, Menu } from "antd";
+import { HomeOutlined, MenuFoldOutlined } from "@ant-design/icons";
+import { ConfigProvider, Layout, Menu } from "antd";
 import Link from "next/link";
 
 const { Header } = Layout;
@@ -20,35 +18,35 @@ const Navbar = () => {
           display: "flex",
           alignItems: "center",
           justifyContent: "space-between",
-          // backgroundColor: "wheat",
+          backgroundColor: "transparent",
           paddingRight: "10px",
         }}
       >
         <Link href={"/"} style={{}}>
           <HomeOutlined style={{ fontSize: "30px" }} />
         </Link>
-        {/* <ConfigProvider
+        <ConfigProvider
           theme={{
             components: {
               Menu: {
                 itemActiveBg: "none",
-                itemSelectedColor: "black",
+                // itemSelectedColor: "black",
+                colorBgBlur: "#00b96b",
+                colorBgBase: "transparent",
               },
             },
           }}
-        > */}
-
-        <Menu
-          multiple={true}
-          theme="dark"
-          overflowedIndicator={<MenuFoldOutlined />}
-          disabledOverflow
-          mode="horizontal"
-          defaultSelectedKeys={["2"]}
-          items={navbarItems(role)}
-        />
-
-        {/* </ConfigProvider> */}
+        >
+          <Menu
+            multiple={true}
+            theme="dark"
+            overflowedIndicator={<MenuFoldOutlined />}
+            disabledOverflow
+            mode="horizontal"
+            defaultSelectedKeys={["2"]}
+            items={navbarItems(role)}
+          />
+        </ConfigProvider>
       </Header>
     </>
   );
