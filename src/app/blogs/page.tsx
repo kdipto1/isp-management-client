@@ -1,8 +1,10 @@
+import { Row } from "antd";
+
 const BlogsPage = () => {
   return (
-    <div style={{ minHeight: "100vh" }}>
-      <h2>This is blogs page</h2>
-    </div>
+    <Row content="center" style={{ minHeight: "100vh" }}>
+      <h2>Coming Soon!</h2>
+    </Row>
   );
 };
 

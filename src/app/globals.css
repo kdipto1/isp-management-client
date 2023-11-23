@@ -4,3 +4,7 @@
   margin: 0;
   font-family: system-ui;
 }
+
+body {
+  overflow-x: hidden;
+}

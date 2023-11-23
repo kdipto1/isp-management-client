@@ -1,8 +1,8 @@
 import { Carousel, Col, Row } from "antd";
 import Image from "next/image";
-import banner2 from "../../assets/banner2.jpeg";
-import banner1 from "../../assets/banner1.jpg";
-import banner from "../../assets/banner.jpg";
+import banner2 from "../../assets/banner_4.svg";
+import banner1 from "../../assets/banner_5.svg";
+import banner from "../../assets/banner_6.svg";
 
 const contentStyle: React.CSSProperties = {
   height: "600px",
@@ -40,9 +40,9 @@ const Banner = () => {
             <div>
               <div style={contentStyle}>
                 <Image
-                  src={banner2}
-                  width={1500}
-                  height={700}
+                  src={banner1}
+                  width={600}
+                  height={600}
                   alt="banner image"
                 />
               </div>
@@ -51,8 +51,8 @@ const Banner = () => {
               <div style={contentStyle}>
                 <Image
                   src={banner}
-                  width={1600}
-                  height={700}
+                  width={600}
+                  height={600}
                   alt="banner image"
                 />
               </div>
@@ -60,9 +60,9 @@ const Banner = () => {
             <div>
               <div style={contentStyle}>
                 <Image
-                  src={banner1}
-                  width={1600}
-                  height={700}
+                  src={banner2}
+                  width={600}
+                  height={600}
                   alt="banner image"
                 />
               </div>
